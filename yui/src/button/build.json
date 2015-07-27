@@ -1,0 +1,10 @@
+{
+    "name": "moodle-atto_planetestream-button",
+    "builds": {
+        "moodle-atto_planetestream-button": {
+            "jsfiles": [
+                "button.js"
+            ]
+        }
+    }
+}
