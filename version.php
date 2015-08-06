@@ -23,7 +23,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-$plugin->version   = 2015072300;
+$plugin->version   = 2015072700;
 $plugin->requires  = 2014041100; // Moodle 2.7.
 $plugin->component = 'atto_planetestream';
 $plugin->release   = '5.69';
