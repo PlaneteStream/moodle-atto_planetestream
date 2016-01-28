@@ -111,8 +111,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         html.append('<form class="atto_form"><div class="mdl-align">'
  + '<iframe style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
  + 'height: ' + (parseInt(height, 10) - 65) + 'px;" src="' + this.get('estream_url')
- + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host + ':'
- + (window.location.port === '' ? '80' : window.location.port) + '"></iframe></div></form>');
+ + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host + '"></iframe></div></form>');
         dialogue.set('bodyContent', html);
         dialogue.show();
         this.markUpdated();
