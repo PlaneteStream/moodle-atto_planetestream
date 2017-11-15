@@ -47,7 +47,7 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
     $userip = atto_planetestream_obfuscate(getremoteaddr());
     $authticket = atto_planetestream_getauthticket($url, $checksum, $delta, $userip, $params);
     if ($authticket == '') {
-        $params['disabled'] = true;
+       $params['disabled'] = true;
     }
     $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
     . '&ticket=' . $authticket . '&inlinemode=moodle';
@@ -95,10 +95,13 @@ function atto_planetestream_obfuscate($strx) {
  */
 function atto_planetestream_getauthticket($url, $checksum, $delta, $userip, &$params) {
     $return = '';
+	
+	//$return = $url . "~~~" . $checksum . "~~~~" . $delta . "~~~~" . $userip;
     try {
         $url .= '/VLE/Moodle/Auth/?source=1&checksum=' . $checksum . '&delta=' . $delta . '&u=' . $userip;
         if (!$curl = curl_init($url)) {
-            return '';
+           return '';
+		   //return $return;
         }
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 15);
         curl_setopt($curl, CURLOPT_TIMEOUT, 15);
@@ -106,6 +109,7 @@ function atto_planetestream_getauthticket($url, $checksum, $delta, $userip, &$pa
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_MAXREDIRS, 4);
         curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($curl);
         if (strpos($response, '{"ticket":') === 0) {
             $jobj = json_decode($response);

@@ -49,7 +49,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      * @method _listen
      * @private
      */
-    _listen: function () {
+    _listen: function () {		
         if (window.addEventListener) {
             eventMethod = 'addEventListener';
             messageEvent = 'message';
@@ -60,16 +60,12 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
             me._insertContent('Sorry, your web-browser is not compatible with this feature.');
         }
         var evX = window[eventMethod];
-        evX(messageEvent, function (e) {
-            var strembedcode = e.data;
-            if (strembedcode.indexOf("rt=2") != -1) {
-                strembedcode = strembedcode + '&extended=true';
-            }
-            me._insertContent('<iframe style="width: '
+        evX(messageEvent, function (e) {			
+            me._insertContent('<iframe allowfullscreen style="width: '
  + me.get('estream_width') + 'px; height: '
  + me.get('estream_height') + 'px; border: 0" src="'
- + me.get('estream_url') + '/Embed.aspx?' + strembedcode + '"></iframe><a href="'
- + '/_planetestreamiframe_/Embed.aspx?' + strembedcode + '">&nbsp;</a>');
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe><a href="'
+ + '_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA"></a>');
         }, false);
     },
     /**
@@ -79,6 +75,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      * @private
      */
     _insertContent: function (content) {
+		
         if (!contentinserted) {
             me.getDialogue().hide();
             me.editor.focus();
@@ -95,7 +92,6 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      */
     _displayDialogue: function (e) {
         e.preventDefault();
-        contentinserted = false;
         var dialogue = this.getDialogue({
             headerContent: 'Insert Planet eStream Item',
             width: width + 'px',
@@ -111,7 +107,10 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         html.append('<form class="atto_form"><div class="mdl-align">'
  + '<iframe style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
  + 'height: ' + (parseInt(height, 10) - 65) + 'px;" src="' + this.get('estream_url')
- + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host + '"></iframe></div></form>');
+ + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host
+ + ':' + ((window.location.port === '80' && window.location.protocol==='http')|
+ (window.location.port === '443' && window.location.protocol==='https')
+ ? '' : window.location.port) + '"></iframe></div></form>');
         dialogue.set('bodyContent', html);
         dialogue.show();
         this.markUpdated();
