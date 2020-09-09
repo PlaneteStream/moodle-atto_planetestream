@@ -59,14 +59,46 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         }
         var evX = window[eventMethod];
         evX(messageEvent, function (e) {
-        evX(messageEvent, function (e) {
+       
+			var pagetype = me.get('pagetype');
 			
-            me._insertContent('<iframe allowfullscreen style="width: '
+			if (pagetype == 'mod-assign-editsubmission') { // iFrames will be stripped out of assign subs
+				
+					var data = e.data;
+					var title="Assignment Submission";
+					try {
+						var split = data.split("&");
+				 title = split[1].split("=")[1];
+			    title = decodeURIComponent(title);
+				title = title.split("+").join(" ");
+					} catch(ex) {
+						console.log(ex);
+					}
+				
+				
+				me._insertContent('<a href="'
+ + me.get('estream_url') + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+				
+				} else {
+					
+						if (me.get('estream_width') == 0 && me.get('estream_height') == 0) {
+			    me._insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe><a href="'
+ + '/_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA">&nbsp;</a></div>');
+		} else {
+			            me._insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: '
  + me.get('estream_width') + 'px; height: '
  + me.get('estream_height') + 'px; border: 0" src="'
  + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe><a href="'
- + '/_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA">&nbsp;</a>');
+ + '_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA"></a>');
+		}
+					
+				}
+			
+  e.target.removeEventListener(e.type, arguments.callee);
+
         }, false);
+		//window.removeEventListener('message', 'onmessage');
     },
     /**
      * Insert the Planet eStream content.
@@ -80,7 +112,8 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
             me.editor.focus();
             me.get('host').insertContentAtFocusPoint(content);
             me.markUpdated();
-            contentinserted = true;
+          //  contentinserted = true;
+			
         }
     },
     /**
@@ -103,8 +136,8 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
             dialogue.set('height', height + 'px');
         }
         html = Y.Node.create('<div></div>');
-        html.append('<form class="atto_form"><div class="mdl-align">'
- + '<iframe style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
+        html.append('<form class="atto_form"><div class="mdl-align" style="overflow:auto;-webkit-overflow-scrolling:touch;">'
+ + '<iframe allow="microphone; camera;" id="ifestream" style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
  + 'height: ' + (parseInt(height, 10) - 65) + 'px;" src="' + this.get('estream_url')
  + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host
  + ':' + ((window.location.port === '80' && window.location.protocol==='http')|
@@ -137,6 +170,9 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
             value: ''
         },
         estream_width: {
+            value: ''
+        },
+		pagetype: {
             value: ''
         }
     }

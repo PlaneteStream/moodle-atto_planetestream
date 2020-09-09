@@ -43,7 +43,15 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
     }
     $params['estream_url'] = $url;
     $checksum = atto_planetestream_getchecksum();
-    $delta = atto_planetestream_obfuscate($USER->username);
+	
+	profile_load_data($USER);
+	
+	if (isset($USER->profile_field_planetestreamusername) && !empty($USER->profile_field_planetestreamusername)) {
+    $delta = atto_planetestream_obfuscate($USER->profile_field_planetestreamusername);
+	} else {
+	$delta = atto_planetestream_obfuscate($USER->username);
+	}
+
     $userip = atto_planetestream_obfuscate(getremoteaddr());
     $authticket = atto_planetestream_getauthticket($url, $checksum, $delta, $userip, $params);
     if ($authticket == '') {
@@ -52,7 +60,9 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
     $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
     . '&ticket=' . $authticket . '&inlinemode=moodle';
     $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
+	$path .= '&assign=' . ((string)$PAGE->pagetype == 'mod-assign-editsubmission' ? "true" : "false");
     $params['estream_path'] = $path;
+	$params['pagetype'] = (string)$PAGE->pagetype;
     return $params;
 }
 /**
