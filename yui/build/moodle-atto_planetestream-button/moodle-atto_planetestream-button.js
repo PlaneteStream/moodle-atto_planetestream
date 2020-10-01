@@ -64,7 +64,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 		
        var pagetype = me.get('pagetype');
 			
-			if (pagetype == 'mod-assign-editsubmission') { // iFrames will be stripped out of assign subs
+			if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { // iFrames will be stripped out of assign subs
 				
 				var data = e.data;
 					var title="Assignment Submission";
