@@ -62,6 +62,8 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         var evX = window[eventMethod];
         evX(messageEvent, function (e) {	
 		
+		if (e.data.indexOf("ID=") > -1 && e.data.indexOf("&source=moodle") > -1) {
+		
        var pagetype = me.get('pagetype');
 			
 			if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { // iFrames will be stripped out of assign subs
@@ -97,6 +99,9 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 				}
 			
   e.target.removeEventListener(e.type, arguments.callee);
+  
+		}
+  
         }, false);
 		//window.removeEventListener('message', 'onmessage');
     },
