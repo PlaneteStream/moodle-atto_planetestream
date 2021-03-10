@@ -49,7 +49,11 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
 	if (isset($USER->profile_field_planetestreamusername) && !empty($USER->profile_field_planetestreamusername)) {
     $delta = atto_planetestream_obfuscate($USER->profile_field_planetestreamusername);
 	} else {
-	$delta = atto_planetestream_obfuscate($USER->username);
+	if (get_config('assignsubmission_estream', 'usemail') == true) {
+		$delta = atto_planetestream_obfuscate($USER->email);
+	} else {
+		$delta = atto_planetestream_obfuscate($USER->username);
+	}
 	}
 	
 	$assignmode = "false";
