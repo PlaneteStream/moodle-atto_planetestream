@@ -37,10 +37,7 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
         $disabled = true;
     }
     $params['disabled'] = $disabled;
-    $url = rtrim(get_config('assignsubmission_estream', 'url') , '/');
-    if (empty($url)) {
-        $url = rtrim(get_config('planetestream', 'url') , '/');
-    }
+    $url = rtrim(get_config('assignsubmission_estream', 'url') , '/'); 
     $params['estream_url'] = $url;
     $checksum = atto_planetestream_getchecksum();
 	

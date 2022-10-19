@@ -70,15 +70,9 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 			if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { // iFrames will be stripped out of assign subs
 				
 					var data = e.data;
-					var title="Assignment Submission";
-					try {
-						var split = data.split("&");
-				 title = split[1].split("=")[1];
-			    title = decodeURIComponent(title);
-				title = title.split("+").join(" ");
-					} catch(ex) {
-						console.log(ex);
-					}
+					
+							var title = me._getQS(data, "title");
+								title = title.split("+").join(" ");
 				
 				if (e.data.indexOf("delta=") > -1) {
 					
@@ -159,6 +153,16 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 			
         }
     },
+	_getQS: function(query, variable) {
+		var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return "Response";
+	},
     /**
      * Display the Planet eStream dialogue.
      *

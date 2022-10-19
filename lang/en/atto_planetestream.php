@@ -23,3 +23,7 @@
 
 $string['pluginname'] = 'Planet eStream';
 $string['planetestream:visible'] = 'Visible';
+$string['privacy:metadata:atto_planetestream'] = 'In order to integrate with Planet eStream, user information must be relayed.';
+$string['privacy:metadata:atto_planetestream:userid'] = 'Your user ID is used to find your email address.';
+$string['privacy:metadata:atto_planetestream:userip'] = 'Your IP address is used as a security measure when sending data between Moodle and Planet eStream.';
+$string['privacy:metadata:atto_planetestream:email'] = 'Your email is used to complete authentication between Moodle and Planet eStream.';
