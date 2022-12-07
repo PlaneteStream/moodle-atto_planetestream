@@ -3,7 +3,7 @@
 
 namespace atto_planetestream\privacy;
 
-class provider implements
+class provider {
 
 public static function get_metadata(collection $collection): collection {
     $collection->add_external_location_link('atto_planetestream', [
