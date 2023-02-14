@@ -68,12 +68,31 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
     if ($authticket == '') {
        $params['disabled'] = true;
     }
-    $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
+	
+		if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { 
+		
+		    $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
+    . '&ticket=' . $authticket . '&inlinemode=moodle&assign=true';
+    $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
+	$path .= '&assign=' . $assignmode;
+    $params['estream_path'] = $path;
+	$params['pagetype'] = (string)$PAGE->pagetype;
+		
+		} else {
+			
+			    $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
     . '&ticket=' . $authticket . '&inlinemode=moodle';
     $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
 	$path .= '&assign=' . $assignmode;
     $params['estream_path'] = $path;
 	$params['pagetype'] = (string)$PAGE->pagetype;
+			
+		}
+	
+
+	
+	
+	
     return $params;
 }
 /**
