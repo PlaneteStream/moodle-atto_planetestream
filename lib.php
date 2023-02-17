@@ -54,12 +54,14 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
 	}
 	
 	$assignmode = "false";
+	
+	$pagetype = (string)$PAGE->pagetype;
 		
-		if ((string)$PAGE->pagetype == 'mod-assign-editsubmission') {
+		if ($pagetype == 'mod-assign-editsubmission') {
 				$assignmode = "true";
 		}
 		
-		if ((string)$PAGE->pagetype == 'mod-assign-gradingpanel') {
+		if ($pagetype == 'mod-assign-gradingpanel') {
 				$assignmode = "true";
 		}
 
@@ -69,23 +71,23 @@ function atto_planetestream_params_for_js($elementid, $options, $fpoptions) {
        $params['disabled'] = true;
     }
 	
-		if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { 
+		if ($pagetype == 'mod-assign-editsubmission' || $pagetype == 'mod-assign-gradingpanel') { 
 		
 		    $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
     . '&ticket=' . $authticket . '&inlinemode=moodle&assign=true';
     $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
 	$path .= '&assign=' . $assignmode;
     $params['estream_path'] = $path;
-	$params['pagetype'] = (string)$PAGE->pagetype;
+	$params['pagetype'] = $pagetype;
 		
 		} else {
 			
 			    $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
     . '&ticket=' . $authticket . '&inlinemode=moodle';
-    $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
+    $path .= '&mpu=' . ($pagetype == 'mod-assign-view' ? "true" : "false");
 	$path .= '&assign=' . $assignmode;
     $params['estream_path'] = $path;
-	$params['pagetype'] = (string)$PAGE->pagetype;
+	$params['pagetype'] = $pagetype;
 			
 		}
 	
