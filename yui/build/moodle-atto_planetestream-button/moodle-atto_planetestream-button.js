@@ -187,7 +187,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         }
         html = Y.Node.create('<div></div>');
         html.append('<form class="atto_form"><div class="mdl-align" style="overflow:auto;-webkit-overflow-scrolling:touch;">'
- + '<iframe allow="microphone; camera;" id="ifestream" style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
+ + '<iframe allow="microphone; camera; screen;" id="ifestream" style="border: 0px; width: ' + (parseInt(width, 10) - 78) + 'px;'
  + 'height: ' + (parseInt(height, 10) - 65) + 'px;" src="' + this.get('estream_url')
  + this.get('estream_path') + '&td=' + window.location.protocol + '//' + window.location.host
  + ':' + ((window.location.port === '80' && window.location.protocol==='http')|
