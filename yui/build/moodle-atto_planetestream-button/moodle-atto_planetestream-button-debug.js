@@ -61,9 +61,7 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
         }
         var evX = window[eventMethod];
         evX(messageEvent, function (e) {
-			
-			  e.target.removeEventListener(e.type, arguments.callee);
-			
+						
 					if (e.data.indexOf("ID=") > -1) {
 	    if (e.data.indexOf("&source=moodle") > -1 || e.data.indexOf("&source=Moodle") > -1) {
 			
@@ -137,10 +135,8 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 			}
 			}
 
-        }, false);
-		//window.removeEventListener('message', 'onmessage');
+        }, { once: true });
 		
-		//<p>' + me.get('estream_height') + me.get('estream_width') + '</p>
     },
     /**
      * Insert the Planet eStream content.
@@ -149,13 +145,13 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      * @private
      */
     _insertContent: function (content) {
-        if (!contentinserted) {
+   
             me.getDialogue().hide();
             me.editor.focus();
             me.get('host').insertContentAtFocusPoint(content);
             me.markUpdated();
-           // contentinserted = true;
-        }
+            contentinserted = true;
+		   
     },
 	_getQS: function(query, variable) {
 		var vars = query.split('&');
