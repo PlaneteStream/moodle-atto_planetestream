@@ -94,14 +94,12 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 							if (e.data.indexOf("delta=") > -1) {
 								
 								  me._insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
- + me.get('estream_url') + '/Embed.aspx?' + e.data + '"></iframe><a href="'
- + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></div>');
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '"></iframe></div>');
 								
 							} else {
 								
 								  me._insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
- + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe><a href="'
- + '/_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA">&nbsp;</a></div>');
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe></div>');
 								
 							}
 										  
@@ -113,16 +111,14 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 					      me._insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: '
  + me.get('estream_width') + 'px; height: '
  + me.get('estream_height') + 'px; border: 0" src="'
- + me.get('estream_url') + '/Embed.aspx?' + e.data + '"></iframe><a href="'
- + '_planetestreamiframe_/Embed.aspx?' + e.data + '"></a>');
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '"></iframe>');
 					
 				} else {
 					
 					      me._insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: '
  + me.get('estream_width') + 'px; height: '
  + me.get('estream_height') + 'px; border: 0" src="'
- + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe><a href="'
- + '_planetestreamiframe_/Embed.aspx?' + e.data + '&delta=ESDLTA"></a>');
+ + me.get('estream_url') + '/Embed.aspx?' + e.data + '&delta=ESDLTA"></iframe>');
 					
 				}
 					      
