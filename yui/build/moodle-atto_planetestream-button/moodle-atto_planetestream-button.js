@@ -79,12 +79,12 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 				if (e.data.indexOf("delta=") > -1) {
 					
 					me._insertContent('<a href="'
- + me.get('estream_url') + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
+ + me.get('estream_url') + '/embed.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
 					
 				} else {
 					
 					me._insertContent('<a href="'
- + me.get('estream_url') + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+ + me.get('estream_url') + '/embed.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
 					
 				}
 				
