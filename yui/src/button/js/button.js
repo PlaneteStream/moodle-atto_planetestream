@@ -49,17 +49,18 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      */
     _listen: function () {
 		
-        if (window.addEventListener) {
-            eventMethod = 'addEventListener';
-            messageEvent = 'message';
-        } else if (window.postMessage) {
-            eventMethod = 'attachEvent';
-            messageEvent = 'onmessage';
-        } else {
-            me._insertContent('Sorry, your web-browser is not compatible with this feature.');
-        }
+        function handleMessage(e) {
+    me._insertContent(e.data); // your logic
+
+    // Remove listener after it's used
+    window.removeEventListener('message', handleMessage);
+}
+
+// Always remove before adding, to prevent duplicates
+window.removeEventListener('message', handleMessage);
+window.addEventListener('message', handleMessage);
 		
-        var evX = window[eventMethod];
+        var evX = window['addEventListener'];
         evX(messageEvent, function (e) {
 			
 			
@@ -78,12 +79,12 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
 				if (e.data.indexOf("delta=") > -1) {
 					
 					me._insertContent('<a href="'
- + me.get('estream_url') + '/embed.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
+ + me.get('estream_url') + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
 					
 				} else {
 					
 					me._insertContent('<a href="'
- + me.get('estream_url') + '/embed.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+ + me.get('estream_url') + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
 					
 				}
 				
