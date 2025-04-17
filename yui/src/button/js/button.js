@@ -47,24 +47,22 @@ Y.namespace('M.atto_planetestream').Button = Y.Base.create('button', Y.M.editor_
      * @method _listen
      * @private
      */
-    _listen: function () {
+     _listen: function () {
+        
+		  if (window.addEventListener) {
+            eventMethod = 'addEventListener';
+            messageEvent = 'message';
+        } else if (window.postMessage) {
+            eventMethod = 'attachEvent';
+            messageEvent = 'onmessage';
+        } else {
+            me._insertContent('Sorry, your web-browser is not compatible with this feature.');
+        }
 		
-        function handleMessage(e) {
-    me._insertContent(e.data); // your logic
-
-    // Remove listener after it's used
-    window.removeEventListener('message', handleMessage);
-}
-
-// Always remove before adding, to prevent duplicates
-window.removeEventListener('message', handleMessage);
-window.addEventListener('message', handleMessage);
-		
-        var evX = window['addEventListener'];
+ var evX = window[eventMethod];
         evX(messageEvent, function (e) {
-			
-			
-			if (e.data.indexOf("ID=") > -1) {
+						
+					if (e.data.indexOf("ID=") > -1) {
 	    if (e.data.indexOf("&source=moodle") > -1 || e.data.indexOf("&source=Moodle") > -1) {
        
 			var pagetype = me.get('pagetype');
